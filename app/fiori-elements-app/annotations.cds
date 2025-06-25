@@ -1,121 +1,207 @@
 using StoreService as service from '../../srv/store-service';
 
+// List Report
 annotate service.Products with @(
-  UI.FieldGroup #GeneratedGroup: {
-    $Type: 'UI.FieldGroupType',
-    Data: [
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>name}',
-        Value: Name
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>price}',
-        Value: Price_amount
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>currency}',
-        Value: Price_currency
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>specs}',
-        Value: Specs
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>rating}',
-        Value: Rating
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>status}',
-        Value: Status
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>supplierInfo}',
-        Value: SupplierInfo
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>madeIn}',
-        Value: MadeIn
-      },
-      {
-        $Type: 'UI.DataField',
-        Label: '{@i18n>productionCompanyName}',
-        Value: ProductionCompanyName
+  UI.SelectionFields: [
+    Rating,
+    Price_currency
+  ],
+
+  UI.PresentationVariant: {
+    SortOrder: [
+      { 
+        Property  : createdAt, 
+        Descending: true 
       }
-    ]
+    ],
+    GroupBy       : ['SupplierInfo'],
+    Visualizations: ['@UI.LineItem']
+  },
+
+  UI.DataPoint #rating: {
+    Value        : Rating,
+    Visualization: #Rating
+  },
+
+  UI.LineItem: [
+    { 
+      Value: Name, 
+      Label: '{@i18n>name}' 
+    },
+    { 
+      Value: Price_amount, 
+      Label: '{@i18n>price}' 
+    },
+    { 
+      Value: Price_currency, 
+      Label: '{@i18n>currency}' 
+    },
+    { 
+      $Type : 'UI.DataFieldForAnnotation', 
+      Target: '@UI.DataPoint#rating',
+      Label : '{@i18n>rating}' 
+    },
+    { 
+      Value: Status, 
+      Label: '{@i18n>status}' 
+    },
+    { 
+      Value: SupplierInfo, 
+      Label: '{@i18n>supplierInfo}' 
+    }
+  ],
+
+  UI.SelectionVariant #OK: {
+    SelectOptions: [{
+      PropertyName: Status,
+      Ranges: [{ 
+        Option: #EQ, 
+        Low   : 'OK', 
+        Sign  : #I 
+      }]
+    }],
+    Text: '{@i18n>ok}'
+  },
+
+  UI.SelectionVariant #STORAGE: {
+    SelectOptions: [{
+      PropertyName: Status,
+      Ranges: [{ 
+        Option: #EQ, 
+        Low   : 'STORAGE', 
+        Sign  : #I 
+      }]
+    }],
+    Text: '{@i18n>storage}'
+  },
+
+  UI.SelectionVariant #OUT_OF_STOCK: {
+    SelectOptions: [{
+      PropertyName: Status,
+      Ranges: [{ 
+        Option: #EQ, 
+        Low   : 'OUT_OF_STOCK', 
+        Sign  : #I 
+      }]
+    }],
+    Text: '{@i18n>outOfStock}'
+  }
+);
+
+// Object Page
+annotate service.Products with @(
+  UI.HeaderInfo: {
+    TypeName      : '{@i18n>productTitle}',
+    TypeNamePlural: '{@i18n>productsTitle}',
+    Title         : { 
+      Value: Name 
+    }
   },
 
   UI.Facets: [
     {
-      $Type: 'UI.ReferenceFacet',
-      ID: 'GeneratedFacet1',
-      Label: '{i18n>generalInfo}',
-      Target: '@UI.FieldGroup#GeneratedGroup'
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'ProductForm',
+      Label : '{@i18n>generalInfo}',
+      Target: '@UI.FieldGroup#ProductForm'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'Comments',
+      Label : '{@i18n>comments}',
+      Target: 'Comment/@UI.LineItem'
     }
   ],
 
-  UI.LineItem: [
-    {
-      $Type: 'UI.DataField',
-      Label: '{@i18n>name}',
-      Value: Name
-    },
-    {
-      $Type: 'UI.DataField',
-      Label: '{@i18n>price}',
-      Value: Price_amount
-    },
-    {
-      $Type: 'UI.DataField',
-      Label: '{@i18n>currency}',
-      Value: Price_currency
-    },
-    {
-      $Type: 'UI.DataField',
-      Label: '{@i18n>rating}',
-      Value: Rating
-    },
-    {
-      $Type: 'UI.DataField',
-      Label: '{@i18n>status}',
-      Value: Status
-    }
-  ]
-);
-
-annotate service.Products with {
-  Store @Common.ValueList: {
-    $Type: 'Common.ValueListType',
-    CollectionPath: 'Stores',
-    Parameters: [
-      {
-        $Type: 'Common.ValueListParameterInOut',
-        LocalDataProperty: Store_ID,
-        ValueListProperty: 'ID'
+  UI.FieldGroup #ProductForm: {
+    Data: [
+      { 
+        Value: Name, 
+        Label: '{@i18n>name}' 
       },
-      {
-        $Type: 'Common.ValueListParameterDisplayOnly',
-        ValueListProperty: 'Name'
+      { 
+        Value: Price_amount, 
+        Label: '{@i18n>price}' 
       },
-      {
-        $Type: 'Common.ValueListParameterDisplayOnly',
-        ValueListProperty: 'Email'
+      { 
+        Value: Price_currency, 
+        Label: '{@i18n>currency}' 
       },
-      {
-        $Type: 'Common.ValueListParameterDisplayOnly',
-        ValueListProperty: 'PhoneNumber'
+      { 
+        Value: Specs, 
+        Label: '{@i18n>specs}' 
       },
-      {
-        $Type: 'Common.ValueListParameterDisplayOnly',
-        ValueListProperty: 'Address'
+      { 
+        $Type : 'UI.DataFieldForAnnotation', 
+        Target: '@UI.DataPoint#rating', 
+        Label : '{@i18n>rating}' 
+      },
+      { 
+        Value: Status, 
+        Label: '{@i18n>status}' 
+      },
+      { 
+        Value: SupplierInfo, 
+        Label: '{@i18n>supplierInfo}' 
+      },
+      { 
+        Value: MadeIn, 
+        Label: '{@i18n>madeIn}' 
+      },
+      { 
+        Value: ProductionCompanyName, 
+        Label: '{@i18n>productionCompanyName}' 
       }
     ]
   }
-};
+);
+
+// Object Page Comments
+annotate service.ProductComments with @(
+  UI.Facets: [{
+    $Type : 'UI.ReferenceFacet',
+    ID    : 'CommentDetails',
+    Label : '{@i18n>commentDetails}',
+    Target: '@UI.FieldGroup#CommentDetails'
+  }],
+
+  UI.FieldGroup #CommentDetails: {
+    Data: [
+      { 
+        Value: Author, 
+        Label: '{@i18n>author}' 
+      },
+      { 
+        Value: Message, 
+        Label: '{@i18n>commentText}' 
+      },
+      { 
+        Value: Posted, 
+        Label: '{@i18n>posted}' 
+      },
+      { 
+        Value: Rating, 
+        Label: '{@i18n>rating}' 
+      }
+    ]
+  },
+
+  UI.LineItem: [
+    { 
+      Value: Author, 
+      Label: '{@i18n>author}' 
+    },
+    { 
+      Value: Message, 
+      Label: '{@i18n>commentText}' 
+    },
+    { 
+      Value: Posted, 
+      Label: '{@i18n>posted}' 
+    },
+    { 
+      Value: Rating, 
+      Label: '{@i18n>rating}' 
+    }
+  ]
+);

@@ -20,7 +20,7 @@
         "uri": "/root/",
         "type": "OData",
         "settings": {
-          "annotations": [],
+          "annotations": ["annotations"],
           "odataVersion": "4.0"
         }
       }
@@ -131,7 +131,21 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "quickVariantSelection": {
+                      "paths": [
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OK"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#STORAGE"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OUT_OF_STOCK"
+                        }
+                      ],
+                      "showCounts": true
+                    }
                   }
                 }
               }
@@ -145,6 +159,12 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
+              "content": {
+                "header": {
+                  "anchorBarVisible": true,
+                  "visible": true
+                }
+              },
               "contextPath": "/Products",
               "navigation": {
                 "Comment": {
