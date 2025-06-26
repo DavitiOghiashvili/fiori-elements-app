@@ -24,6 +24,11 @@ annotate service.Products with @(
   },
 
   UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.mutate',
+      Label : '{@i18n>mutate}'
+    },
     { 
       Value: Name, 
       Label: '{@i18n>name}' 
@@ -98,6 +103,14 @@ annotate service.Products with @(
     }
   },
 
+  UI.Identification : [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.mutate',
+        Label : '{@i18n>mutate}'
+      },
+    ],
+
   UI.Facets: [
     {
       $Type : 'UI.ReferenceFacet',
@@ -115,6 +128,11 @@ annotate service.Products with @(
 
   UI.FieldGroup #ProductForm: {
     Data: [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.mutate',
+        Label : '{@i18n>mutate}'
+      },
       { 
         Value: Name, 
         Label: '{@i18n>name}' 
@@ -167,6 +185,11 @@ annotate service.ProductComments with @(
 
   UI.FieldGroup #CommentDetails: {
     Data: [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.mutate',
+        Label : '{@i18n>mutate}'
+      },
       { 
         Value: Author, 
         Label: '{@i18n>author}' 
@@ -187,6 +210,11 @@ annotate service.ProductComments with @(
   },
 
   UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.mutate',
+      Label : '{@i18n>mutate}'
+    },
     { 
       Value: Author, 
       Label: '{@i18n>author}' 
