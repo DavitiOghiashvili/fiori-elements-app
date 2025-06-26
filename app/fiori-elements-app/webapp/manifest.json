@@ -20,7 +20,9 @@
         "uri": "/root/",
         "type": "OData",
         "settings": {
-          "annotations": ["annotations"],
+          "annotations": [
+            "annotations"
+          ],
           "odataVersion": "4.0"
         }
       }
@@ -145,6 +147,27 @@
                         }
                       ],
                       "showCounts": true
+                    }
+                  },
+                  "columns": {
+                    "CustomDateColumn": {
+                      "key": "customDateColumn",
+                      "header": "{i18n>customDateColumn}",
+                      "template": "fiorielementsapp.ext.fragment.CustomDateColumn",
+                      "availability": "Adaptation",
+                      "properties": [
+                        "createdAt",
+                        "modifiedAt"
+                      ]
+                    }
+                  }
+                },
+                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                  "filterFields": {
+                    "customRatingFilter": {
+                      "label": "{i18n>customRatingFilter}",
+                      "property": "Rating",
+                      "template": "fiorielementsapp.ext.fragment.CustomRatingFilter"
                     }
                   }
                 }

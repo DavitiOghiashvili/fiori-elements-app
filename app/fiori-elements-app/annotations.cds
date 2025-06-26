@@ -3,7 +3,6 @@ using StoreService as service from '../../srv/store-service';
 // List Report
 annotate service.Products with @(
   UI.SelectionFields: [
-    Rating,
     Price_currency
   ],
 
@@ -24,6 +23,11 @@ annotate service.Products with @(
   },
 
   UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
     {
       $Type : 'UI.DataFieldForAction',
       Action: 'StoreService.mutate',
@@ -104,12 +108,17 @@ annotate service.Products with @(
   },
 
   UI.Identification : [
-      {
-        $Type : 'UI.DataFieldForAction',
-        Action: 'StoreService.mutate',
-        Label : '{@i18n>mutate}'
-      },
-    ],
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.mutate',
+      Label : '{@i18n>mutate}'
+    },
+  ],
 
   UI.Facets: [
     {
@@ -128,6 +137,11 @@ annotate service.Products with @(
 
   UI.FieldGroup #ProductForm: {
     Data: [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.getAverageRating',
+        Label : '{@i18n>getAverageRating}'
+      },
       {
         $Type : 'UI.DataFieldForAction',
         Action: 'StoreService.mutate',
@@ -187,6 +201,11 @@ annotate service.ProductComments with @(
     Data: [
       {
         $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.getAverageRating',
+        Label : '{@i18n>getAverageRating}'
+      },
+      {
+        $Type : 'UI.DataFieldForAction',
         Action: 'StoreService.mutate',
         Label : '{@i18n>mutate}'
       },
@@ -210,6 +229,11 @@ annotate service.ProductComments with @(
   },
 
   UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
     {
       $Type : 'UI.DataFieldForAction',
       Action: 'StoreService.mutate',
