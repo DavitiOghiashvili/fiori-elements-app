@@ -154,11 +154,7 @@
                       "key": "customDateColumn",
                       "header": "{i18n>customDateColumn}",
                       "template": "fiorielementsapp.ext.fragment.CustomDateColumn",
-                      "availability": "Adaptation",
-                      "properties": [
-                        "createdAt",
-                        "modifiedAt"
-                      ]
+                      "availability": "Adaptation"
                     }
                   }
                 },
@@ -193,6 +189,16 @@
                 "Comment": {
                   "detail": {
                     "route": "ProductCommentsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#ProductForm": {
+                  "fields": {
+                    "CustomFieldHeader": {
+                      "label": "{i18n>customDateField}",
+                      "template": "fiorielementsapp.ext.fragment.CustomDateColumn"
+                    }
                   }
                 }
               }
