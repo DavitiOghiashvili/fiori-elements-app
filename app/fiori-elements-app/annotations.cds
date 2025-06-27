@@ -3,7 +3,6 @@ using StoreService as service from '../../srv/store-service';
 // List Report
 annotate service.Products with @(
   UI.SelectionFields: [
-    Rating,
     Price_currency
   ],
 
@@ -24,6 +23,11 @@ annotate service.Products with @(
   },
 
   UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
     {
       $Type : 'UI.DataFieldForAction',
       Action: 'StoreService.mutate',
@@ -103,13 +107,32 @@ annotate service.Products with @(
     }
   },
 
+  UI.HeaderFacets: [
+    {
+      $Type : 'UI.ReferenceFacet',
+      Target : '@UI.FieldGroup#ProductionCompanyName',
+      Label : '{@i18n>productionCompanyName}'
+    },
+  ],
+
+  UI.FieldGroup#ProductionCompanyName: {
+    Data: [
+      {Value: ProductionCompanyName}
+    ]
+  },
+
   UI.Identification : [
-      {
-        $Type : 'UI.DataFieldForAction',
-        Action: 'StoreService.mutate',
-        Label : '{@i18n>mutate}'
-      },
-    ],
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.mutate',
+      Label : '{@i18n>mutate}'
+    },
+  ],
 
   UI.Facets: [
     {
@@ -117,6 +140,12 @@ annotate service.Products with @(
       ID    : 'ProductForm',
       Label : '{@i18n>generalInfo}',
       Target: '@UI.FieldGroup#ProductForm'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'MyCustomSection',
+      Label : '{@i18n>myCustomSection}',
+      Target: 'Store/@UI.FieldGroup#StoreInfo'
     },
     {
       $Type : 'UI.ReferenceFacet',
@@ -128,6 +157,11 @@ annotate service.Products with @(
 
   UI.FieldGroup #ProductForm: {
     Data: [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.getAverageRating',
+        Label : '{@i18n>getAverageRating}'
+      },
       {
         $Type : 'UI.DataFieldForAction',
         Action: 'StoreService.mutate',
@@ -174,6 +208,33 @@ annotate service.Products with @(
   }
 );
 
+annotate service.Stores with @(
+  UI.FieldGroup #StoreInfo: {
+    Data: [
+      {
+        Value: Name,
+        Label: '{@i18n>storeName}'
+      },
+      {
+        Value: Email,
+        Label: '{@i18n>email}'
+      },
+      {
+        Value: PhoneNumber,
+        Label: '{@i18n>phoneNumber}'
+      },
+      {
+        Value: Address,
+        Label: '{@i18n>address}'
+      },
+      {
+        Value: FloorArea,
+        Label: '{@i18n>floorArea}'
+      },
+    ]
+  }
+);
+
 // Object Page Comments
 annotate service.ProductComments with @(
   UI.Facets: [{
@@ -183,8 +244,42 @@ annotate service.ProductComments with @(
     Target: '@UI.FieldGroup#CommentDetails'
   }],
 
+  UI.LineItem: [
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.getAverageRating',
+      Label : '{@i18n>getAverageRating}'
+    },
+    {
+      $Type : 'UI.DataFieldForAction',
+      Action: 'StoreService.mutate',
+      Label : '{@i18n>mutate}'
+    },
+    { 
+      Value: Author, 
+      Label: '{@i18n>author}' 
+    },
+    { 
+      Value: Message, 
+      Label: '{@i18n>commentText}' 
+    },
+    { 
+      Value: Posted, 
+      Label: '{@i18n>posted}' 
+    },
+    { 
+      Value: Rating, 
+      Label: '{@i18n>rating}' 
+    }
+  ],
+
   UI.FieldGroup #CommentDetails: {
     Data: [
+      {
+        $Type : 'UI.DataFieldForAction',
+        Action: 'StoreService.getAverageRating',
+        Label : '{@i18n>getAverageRating}'
+      },
       {
         $Type : 'UI.DataFieldForAction',
         Action: 'StoreService.mutate',
@@ -208,28 +303,4 @@ annotate service.ProductComments with @(
       }
     ]
   },
-
-  UI.LineItem: [
-    {
-      $Type : 'UI.DataFieldForAction',
-      Action: 'StoreService.mutate',
-      Label : '{@i18n>mutate}'
-    },
-    { 
-      Value: Author, 
-      Label: '{@i18n>author}' 
-    },
-    { 
-      Value: Message, 
-      Label: '{@i18n>commentText}' 
-    },
-    { 
-      Value: Posted, 
-      Label: '{@i18n>posted}' 
-    },
-    { 
-      Value: Rating, 
-      Label: '{@i18n>rating}' 
-    }
-  ]
 );
