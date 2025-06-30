@@ -2,6 +2,12 @@ using StoreService as service from '../../srv/store-service';
 
 // List Report
 annotate service.Products with @(
+  Common.SideEffects #MutateSideEffect: {
+    SourceProperties: ['Status'],
+    TargetProperties: ['Status'],
+    TriggerAction: 'StoreService.mutate'
+  },
+
   UI.SelectionFields: [
     Price_currency
   ],
@@ -99,6 +105,11 @@ annotate service.Products with @(
 
 // Object Page
 annotate service.Products with @(
+  Common.SideEffects #GetAverageRatingSideEffect: {
+    TargetProperties: ['Rating'],
+    TriggerAction: 'StoreService.getAverageRating'
+  },
+
   UI.HeaderInfo: {
     TypeName      : '{@i18n>productTitle}',
     TypeNamePlural: '{@i18n>productsTitle}',
