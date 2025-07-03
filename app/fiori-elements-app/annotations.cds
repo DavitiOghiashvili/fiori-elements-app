@@ -4,8 +4,18 @@ using StoreService as service from '../../srv/store-service';
 annotate service.Products with @(
   Common.SideEffects #MutateSideEffect: {
     SourceProperties: ['Status'],
-    TargetProperties: ['Status'],
+    TargetProperties: ['Rating'],
     TriggerAction: 'StoreService.mutate'
+  },
+
+  Common.SideEffects #AfterGetAverageRating: {
+    TriggerAction   : 'StoreService.getAverageRating',
+    TargetEntities  : ['/Products'],
+  },
+
+  Common.SideEffects #AfterMutate: {
+    TriggerAction   : 'StoreService.mutate',
+    TargetEntities  : ['/Products']
   },
 
   UI.SelectionFields: [

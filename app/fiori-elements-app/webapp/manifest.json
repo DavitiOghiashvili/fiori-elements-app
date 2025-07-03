@@ -182,6 +182,14 @@
                 "header": {
                   "anchorBarVisible": true,
                   "visible": true
+                },
+                "body": {
+                  "sections": {
+                    "CustomStoreSection": {
+                      "title": "{i18n>myCustomSection}",
+                      "template": "fiorielementsapp.ext.fragment.CustomStoreSection"
+                    }
+                  }
                 }
               },
               "contextPath": "/Products",
