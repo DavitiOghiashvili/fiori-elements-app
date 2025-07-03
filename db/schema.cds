@@ -16,6 +16,7 @@ entity Stores: cuid, managed{
                                     on Products.Store = $self;
 }
 
+@odata.draft.enabled
 entity Products: cuid, managed {
         Name                    : String(45) @mandatory; 
         Price                   : Price;
