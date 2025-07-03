@@ -164,6 +164,12 @@ annotate service.Products with @(
     },
     {
       $Type : 'UI.ReferenceFacet',
+      ID    : 'MyCustomSection',
+      Label : '{@i18n>myCustomSection}',
+      Target: 'Store/@UI.FieldGroup#StoreInfo'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
       ID    : 'Comments',
       Label : '{@i18n>comments}',
       Target: 'Comment/@UI.LineItem'
@@ -219,6 +225,33 @@ annotate service.Products with @(
         Value: ProductionCompanyName, 
         Label: '{@i18n>productionCompanyName}' 
       }
+    ]
+  }
+);
+
+annotate service.Stores with @(
+  UI.FieldGroup #StoreInfo: {
+    Data: [
+      {
+        Value: Name,
+        Label: '{@i18n>storeName}'
+      },
+      {
+        Value: Email,
+        Label: '{@i18n>email}'
+      },
+      {
+        Value: PhoneNumber,
+        Label: '{@i18n>phoneNumber}'
+      },
+      {
+        Value: Address,
+        Label: '{@i18n>address}'
+      },
+      {
+        Value: FloorArea,
+        Label: '{@i18n>floorArea}'
+      },
     ]
   }
 );
