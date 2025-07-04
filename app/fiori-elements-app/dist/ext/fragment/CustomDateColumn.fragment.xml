@@ -1,5 +1,0 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core"
-        xmlns="sap.m">
-        <Label id="idCustomDateLabel"
-                text="{i18n>createdAt} {createdAt} - {i18n>modifiedAt} {modifiedAt}" />
-</core:FragmentDefinition>
