@@ -1,0 +1,11 @@
+_schema-version: '3.1'
+ID: fiorielementsapp
+version: 0.0.1
+
+modules:
+  - name: fiorielementsapp
+    type: staticfile
+    path: webapp
+    parameters:
+      routes:
+        - route: fiorielementsapp.${default-domain}
