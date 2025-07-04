@@ -2,6 +2,22 @@ using StoreService as service from '../../srv/store-service';
 
 // List Report
 annotate service.Products with @(
+  Common.SideEffects #MutateSideEffect: {
+    SourceProperties: ['Status'],
+    TargetProperties: ['Rating'],
+    TriggerAction: 'StoreService.mutate'
+  },
+
+  Common.SideEffects #AfterGetAverageRating: {
+    TriggerAction   : 'StoreService.getAverageRating',
+    TargetEntities  : ['/Products'],
+  },
+
+  Common.SideEffects #AfterMutate: {
+    TriggerAction   : 'StoreService.mutate',
+    TargetEntities  : ['/Products']
+  },
+
   UI.SelectionFields: [
     Price_currency
   ],
@@ -99,6 +115,11 @@ annotate service.Products with @(
 
 // Object Page
 annotate service.Products with @(
+  Common.SideEffects #GetAverageRatingSideEffect: {
+    TargetProperties: ['Rating'],
+    TriggerAction: 'StoreService.getAverageRating'
+  },
+
   UI.HeaderInfo: {
     TypeName      : '{@i18n>productTitle}',
     TypeNamePlural: '{@i18n>productsTitle}',
@@ -140,12 +161,6 @@ annotate service.Products with @(
       ID    : 'ProductForm',
       Label : '{@i18n>generalInfo}',
       Target: '@UI.FieldGroup#ProductForm'
-    },
-    {
-      $Type : 'UI.ReferenceFacet',
-      ID    : 'MyCustomSection',
-      Label : '{@i18n>myCustomSection}',
-      Target: 'Store/@UI.FieldGroup#StoreInfo'
     },
     {
       $Type : 'UI.ReferenceFacet',

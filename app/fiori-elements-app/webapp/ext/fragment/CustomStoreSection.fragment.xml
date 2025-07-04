@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:macro="sap.fe.macros">
+    <layout:Grid id="idStoreMacroFieldsGrid">
+        <Text id="idStoreNameLabel"
+            text="{i18n>storeName}" />
+        <macro:Field id="idStoreNameField"
+            metaPath="Store/Name" />
+
+        <Text id="idStoreEmailLabel"
+            text="{i18n>email}" />
+        <macro:Field id="idStoreEmailField"
+            metaPath="Store/Email" />
+
+        <Text id="idStorePhoneLabel"
+            text="{i18n>phoneNumber}" />
+        <macro:Field id="idStorePhoneField"
+            metaPath="Store/PhoneNumber" />
+
+        <Text id="idStoreAddressLabel"
+            text="{i18n>address}" />
+        <macro:Field id="idStoreAddressField"
+            metaPath="Store/Address" />
+
+        <Text id="idStoreEstablishedLabel"
+            text="{i18n>established}" />
+        <macro:Field id="idStoreEstablishedField"
+            metaPath="Store/Established" />
+
+        <Text id="idStoreFloorAreaLabel"
+            text="{i18n>floorArea}" />
+        <macro:Field id="idStoreFloorAreaField"
+            metaPath="Store/FloorArea" />
+    </layout:Grid>
+</core:FragmentDefinition>
