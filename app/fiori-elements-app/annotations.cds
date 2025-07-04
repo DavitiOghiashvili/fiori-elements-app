@@ -164,12 +164,6 @@ annotate service.Products with @(
     },
     {
       $Type : 'UI.ReferenceFacet',
-      ID    : 'MyCustomSection',
-      Label : '{@i18n>myCustomSection}',
-      Target: 'Store/@UI.FieldGroup#StoreInfo'
-    },
-    {
-      $Type : 'UI.ReferenceFacet',
       ID    : 'Comments',
       Label : '{@i18n>comments}',
       Target: 'Comment/@UI.LineItem'
