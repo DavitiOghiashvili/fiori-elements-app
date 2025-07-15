@@ -1,0 +1,226 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "fiorielementsapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.18.0",
+      "toolsId": "0fd71d20-6a3c-4992-8d88-de6cacbbc2a5"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/root/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotations"
+          ],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "Products-display": {
+          "semanticObject": "Products",
+          "action": "display",
+          "title": "{{Products-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.136.2",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "fiorielementsapp.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "ProductsList",
+          "target": "ProductsList"
+        },
+        {
+          "pattern": "Products({key}):?query:",
+          "name": "ProductsObjectPage",
+          "target": "ProductsObjectPage"
+        },
+        {
+          "pattern": "Products({key})/Comment({key2}):?query:",
+          "name": "ProductCommentsObjectPage",
+          "target": "ProductCommentsObjectPage"
+        }
+      ],
+      "targets": {
+        "ProductsList": {
+          "type": "Component",
+          "id": "ProductsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Products",
+              "variantManagement": "Page",
+              "navigation": {
+                "Products": {
+                  "detail": {
+                    "route": "ProductsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable",
+                    "quickVariantSelection": {
+                      "paths": [
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OK"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#STORAGE"
+                        },
+                        {
+                          "annotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#OUT_OF_STOCK"
+                        }
+                      ],
+                      "showCounts": true
+                    }
+                  },
+                  "columns": {
+                    "CustomDateColumn": {
+                      "key": "customDateColumn",
+                      "header": "{i18n>customDateColumn}",
+                      "template": "fiorielementsapp.ext.fragment.CustomDateColumn",
+                      "availability": "Adaptation"
+                    }
+                  }
+                },
+                "@com.sap.vocabularies.UI.v1.SelectionFields": {
+                  "filterFields": {
+                    "customRatingFilter": {
+                      "label": "{i18n>customRatingFilter}",
+                      "property": "Rating",
+                      "template": "fiorielementsapp.ext.fragment.CustomRatingFilter"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductsObjectPage": {
+          "type": "Component",
+          "id": "ProductsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "content": {
+                "header": {
+                  "anchorBarVisible": true,
+                  "visible": true
+                }
+              },
+              "contextPath": "/Products",
+              "navigation": {
+                "Comment": {
+                  "detail": {
+                    "route": "ProductCommentsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.FieldGroup#ProductForm": {
+                  "fields": {
+                    "CustomFieldHeader": {
+                      "label": "{i18n>customDateField}",
+                      "template": "fiorielementsapp.ext.fragment.CustomDateColumn"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ProductCommentsObjectPage": {
+          "type": "Component",
+          "id": "ProductCommentsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Products/Comment"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

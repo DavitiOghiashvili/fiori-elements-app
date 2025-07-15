@@ -1,0 +1,2 @@
+sap.ui.require(["sap/fe/test/JourneyRunner","fiorielementsapp/test/integration/FirstJourney","fiorielementsapp/test/integration/pages/ProductsList","fiorielementsapp/test/integration/pages/ProductsObjectPage","fiorielementsapp/test/integration/pages/ProductCommentsObjectPage"],function(e,t,n,r,i){"use strict";var e=new e({launchUrl:sap.ui.require.toUrl("fiorielementsapp")+"/index.html"});e.run({pages:{onTheProductsList:n,onTheProductsObjectPage:r,onTheProductCommentsObjectPage:i}},t.run)});
+//# sourceMappingURL=opaTests.qunit.js.map
