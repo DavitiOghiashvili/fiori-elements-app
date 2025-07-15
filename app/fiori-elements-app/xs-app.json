@@ -3,7 +3,7 @@
   "authenticationMethod": "none",
   "routes": [
     {
-      "source": "^/root/(.*)$",
+      "source": "^/backend/root/(.*)$",
       "target": "$1",
       "destination": "odata-v4-backend",
       "authenticationType": "none"
