@@ -14,7 +14,7 @@
     "@sap/ux-ui5-tooling": "1"
   },
   "scripts": {
-    "build": "ui5 build --clean-dest --dest dist",
+    "build": "ui5 build --config=ui5-build.yaml --clean-dest --dest dist",
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
   }
 }
