@@ -20,9 +20,6 @@
         "uri": "/root/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "annotations"
-          ],
           "odataVersion": "4.0"
         }
       }
