@@ -1,11 +1,101 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: fiorielementsapp
 version: 0.0.1
 
 modules:
   - name: fiorielementsapp
-    type: staticfile
-    path: webapp
+    type: html5
+    path: .
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build
+      supported-platforms: []
+
+  - name: fiorielementsapp-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: fiorielementsapp-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - name: fiorielementsapp
+          artifacts:
+            - fiorielementsapp.zip
+          target-path: resources/
+
+  - name: fiorielementsapp-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: fiorielementsapp-destination-service
+        parameters:
+          content-target: true
+      - name: fiorielementsapp-repo-host
+        parameters:
+          service-key:
+            name: fiorielementsapp-repo-host-key
+      - name: fiorielementsapp-uaa
+        parameters:
+          service-key:
+            name: fiorielementsapp-uaa-key
     parameters:
-      routes:
-        - route: fiorielementsapp.${default-domain}
+      content:
+        instance:
+          destinations:
+            - Name: fiorielementsapp_html_repo_host
+              ServiceInstanceName: fiorielementsapp-html5-srv
+              ServiceKeyName: fiorielementsapp-repo-host-key
+              sap.cloud.service: fiorielementsapp
+            - Name: fiorielementsapp-uaa
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: fiorielementsapp-xsuaa-service
+              ServiceKeyName: fiorielementsapp-uaa-key
+              sap.cloud.service: fiorielementsapp
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+
+resources:
+  - name: fiorielementsapp-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Name: ui5
+                Authentication: NoAuthentication
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+                HTML5.DynamicDestination: true
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: fiorielementsapp-destination-service
+      service-plan: lite
+
+  - name: fiorielementsapp-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: fiorielementsapp-xsuaa-service
+      service-plan: application
+
+  - name: fiorielementsapp-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: fiorielementsapp-html5-srv
+      service-plan: app-host
+
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
