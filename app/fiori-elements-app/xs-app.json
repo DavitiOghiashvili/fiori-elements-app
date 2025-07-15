@@ -5,8 +5,21 @@
     {
       "source": "^/root/(.*)$",
       "target": "$1",
-      "destination": "fiorielementsapp-destination-service",
+      "destination": "fiorielementsapp-repo-host",
       "authenticationType": "none"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo",
+      "authenticationType": "xsuaa",
+      "cacheControl": "no-cache"
     }
   ]
 }
