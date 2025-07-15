@@ -8,12 +8,15 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
+  "dependencies": {
+    "ui5-task-zipper": "^3.4.2"
+  },
   "devDependencies": {
-    "@ui5/cli": "^3.0.0",
-    "@sap/ux-ui5-tooling": "1"
+    "@sap/ux-ui5-tooling": "1",
+    "@ui5/cli": "^3.0.0"
   },
   "scripts": {
+    "build": "ui5 build --config=ui5-build.yaml --clean-dest --dest dist",
     "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
   }
 }
