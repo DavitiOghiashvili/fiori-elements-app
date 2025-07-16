@@ -199,9 +199,8 @@ annotate service.Products with @(
         Label: '{@i18n>specs}' 
       },
       { 
-        $Type : 'UI.DataFieldForAnnotation', 
-        Target: '@UI.DataPoint#rating', 
-        Label : '{@i18n>rating}' 
+        Value: Rating, 
+        Label: '{@i18n>rating}' 
       },
       { 
         Value: Status, 
