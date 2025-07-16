@@ -55,7 +55,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.136.2",
       "libs": {
@@ -158,7 +158,7 @@
                 "@com.sap.vocabularies.UI.v1.SelectionFields": {
                   "filterFields": {
                     "customRatingFilter": {
-                      "label": "{i18n>customRatingFilter}",
+                      "label": "Custom Rating Filter",
                       "property": "Rating",
                       "template": "fiorielementsapp.ext.fragment.CustomRatingFilter"
                     }
