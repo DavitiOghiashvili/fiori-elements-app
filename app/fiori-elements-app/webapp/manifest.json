@@ -26,10 +26,10 @@
     },
     "crossNavigation": {
       "inbounds": {
-        "Products-display": {
-          "semanticObject": "Products",
+        "freestylesapui5app-display": {
+          "semanticObject": "freestylesapui5app",
           "action": "display",
-          "title": "{{Products-display.flpTitle}}",
+          "title": "Freestyle SAP UI5 App",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -152,6 +152,15 @@
                       "header": "{i18n>customDateColumn}",
                       "template": "fiorielementsapp.ext.fragment.CustomDateColumn",
                       "availability": "Adaptation"
+                    }
+                  },
+                  "actions": {
+                    "CustomNavigation": {
+                      "press": "fiorielementsapp.ext.controller.CustomNavigation.NavigateToFreestyleApp",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Go to Freestyle App"
                     }
                   }
                 },
