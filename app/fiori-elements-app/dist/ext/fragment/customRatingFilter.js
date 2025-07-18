@@ -1,2 +1,2 @@
-sap.ui.define(["sap/ui/model/Filter","sap/ui/model/FilterOperator"],function(e,t){"use strict";return{customRatingFilter(r){return new e({path:"Rating",operator:t.EQ,value1:++r})}}});
+sap.ui.define(["sap/ui/model/Filter","sap/ui/model/FilterOperator"],function(e,t){"use strict";return{customRatingFilter:function(a){switch(a){case"0":return new e({path:"Rating",operator:t.EQ,value1:1});case"1":return new e({path:"Rating",operator:t.EQ,value1:2});case"2":return new e({path:"Rating",operator:t.EQ,value1:3});case"3":return new e({path:"Rating",operator:t.EQ,value1:4});case"4":return new e({path:"Rating",operator:t.EQ,value1:5})}}}});
 //# sourceMappingURL=customRatingFilter.js.map

@@ -17,19 +17,22 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "backend/root/",
+        "uri": "/root/",
         "type": "OData",
         "settings": {
+          "annotations": [
+            "annotations"
+          ],
           "odataVersion": "4.0"
         }
       }
     },
     "crossNavigation": {
       "inbounds": {
-        "freestylesapui5app-display": {
-          "semanticObject": "freestylesapui5app",
+        "Products-display": {
+          "semanticObject": "Products",
           "action": "display",
-          "title": "Freestyle SAP UI5 App",
+          "title": "{{Products-display.flpTitle}}",
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
@@ -55,7 +58,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": false,
+    "flexEnabled": true,
     "dependencies": {
       "minUI5Version": "1.136.2",
       "libs": {
@@ -153,21 +156,12 @@
                       "template": "fiorielementsapp.ext.fragment.CustomDateColumn",
                       "availability": "Adaptation"
                     }
-                  },
-                  "actions": {
-                    "CustomNavigation": {
-                      "press": "fiorielementsapp.ext.controller.CustomNavigation.NavigateToFreestyleApp",
-                      "visible": true,
-                      "enabled": true,
-                      "requiresSelection": false,
-                      "text": "Go to Freestyle App"
-                    }
                   }
                 },
                 "@com.sap.vocabularies.UI.v1.SelectionFields": {
                   "filterFields": {
                     "customRatingFilter": {
-                      "label": "Custom Rating Filter",
+                      "label": "{i18n>customRatingFilter}",
                       "property": "Rating",
                       "template": "fiorielementsapp.ext.fragment.CustomRatingFilter"
                     }
@@ -188,14 +182,6 @@
                 "header": {
                   "anchorBarVisible": true,
                   "visible": true
-                },
-                "body": {
-                  "sections": {
-                    "CustomStoreSection": {
-                      "title": "{i18n>myCustomSection}",
-                      "template": "fiorielementsapp.ext.fragment.CustomStoreSection"
-                    }
-                  }
                 }
               },
               "contextPath": "/Products",
